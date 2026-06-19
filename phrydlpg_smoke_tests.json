@@ -1,0 +1,84 @@
+{
+  "info": {
+    "name": "PhrydlPG Smoke Tests",
+    "description": "E2E Smoke tests for core staging validation",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Content-Type", "value": "application/json"}
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/auth/login",
+          "host": ["{{baseUrl}}"],
+          "path": ["auth", "login"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"admin@phrydlpg.com\",\n  \"password\": \"SecureAdminPass1!\"\n}"
+        }
+      }
+    },
+    {
+      "name": "2. Create Lead",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Authorization", "value": "Bearer {{jwtToken}}"},
+          {"key": "Content-Type", "value": "application/json"}
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/leads",
+          "host": ["{{baseUrl}}"],
+          "path": ["leads"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"firstName\": \"Smoke\",\n  \"lastName\": \"Tester\",\n  \"email\": \"smoke@phrydl.com\",\n  \"phone\": \"9999999999\",\n  \"propertyId\": \"{{propertyId}}\"\n}"
+        }
+      }
+    },
+    {
+      "name": "3. Upload KYC",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Authorization", "value": "Bearer {{jwtToken}}"}
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/tenant/kyc",
+          "host": ["{{baseUrl}}"],
+          "path": ["tenant", "kyc"]
+        },
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "file",
+              "type": "file",
+              "src": []
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "4. Trigger DB Backup",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Authorization", "value": "Bearer {{jwtToken}}"}
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/system/backup",
+          "host": ["{{baseUrl}}"],
+          "path": ["system", "backup"]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "short_name": "PhrydlPG",
+  "name": "PhrydlPG Tenant App",
+  "start_url": "/tenant",
+  "display": "standalone",
+  "theme_color": "#FFC83D",
+  "background_color": "#ffffff"
+}

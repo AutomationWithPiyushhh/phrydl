@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phrydlpg-backend
+  labels:
+    app: phrydlpg-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: phrydlpg-backend
+  template:
+    metadata:
+      labels:
+        app: phrydlpg-backend
+    spec:
+      containers:
+      - name: phrydlpg-backend
+        image: phrydlpg-backend:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+        envFrom:
+        - configMapRef:
+            name: phrydlpg-config
+        - secretRef:
+            name: phrydlpg-secret
+        livenessProbe:
+          httpGet:
+            path: /actuator/health/liveness
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /actuator/health/readiness
+            port: 8080
+          initialDelaySeconds: 15
+          periodSeconds: 5
