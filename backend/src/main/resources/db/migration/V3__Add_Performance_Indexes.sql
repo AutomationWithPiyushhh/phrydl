@@ -26,7 +26,7 @@ CREATE INDEX IF NOT EXISTS idx_payments_date ON payments(payment_date);
 -- We will index the audit logs and complaints which do exist in V1.
 
 -- Audit Logs
-CREATE INDEX IF NOT EXISTS idx_audit_logs_user_id ON audit_logs(user_id);
+CREATE INDEX IF NOT EXISTS idx_audit_logs_performed_by ON audit_logs(performed_by);
 CREATE INDEX IF NOT EXISTS idx_audit_logs_entity_type_id ON audit_logs(entity_type, entity_id);
 
 -- Notifications
