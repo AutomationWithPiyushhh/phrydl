@@ -18,7 +18,6 @@ CREATE INDEX IF NOT EXISTS idx_invoices_prop_status ON invoices(property_id, sta
 
 -- Payments
 CREATE INDEX IF NOT EXISTS idx_payments_invoice_id ON payments(invoice_id);
-CREATE INDEX IF NOT EXISTS idx_payments_tenant_id ON payments(tenant_id);
 CREATE INDEX IF NOT EXISTS idx_payments_status ON payments(status);
 CREATE INDEX IF NOT EXISTS idx_payments_date ON payments(payment_date);
 
