@@ -31,7 +31,7 @@ export function LandingPage() {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
   useEffect(() => {
-    fetch('http://localhost:8081/api/v1/public/room-availability')
+    fetch(`${import.meta.env.VITE_API_URL || 'http://185.2.102.63:8080/api/v1'}/public/room-availability`)
       .then(r => r.json())
       .then(d => { if(d.success) setAvailableBeds(d.data.availableBeds) })
       .catch(e => console.error("Error fetching room availability", e));
@@ -39,7 +39,7 @@ export function LandingPage() {
 
   const openBookingModal = (source: string = 'BOOK_ROOM', title: string = 'Book a Premium Room', roomType?: string) => {
     // Track Analytics Event
-    fetch('http://localhost:8081/api/v1/public/events', {
+    fetch(`${import.meta.env.VITE_API_URL || 'http://185.2.102.63:8080/api/v1'}/public/events`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ type: 'CTA_CLICK', source, title, timestamp: new Date().toISOString() })

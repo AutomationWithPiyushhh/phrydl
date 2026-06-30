@@ -27,7 +27,7 @@ export function AllProperties() {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const response = await fetch('http://localhost:8081/api/v1/public/properties');
+        const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://185.2.102.63:8080/api/v1'}/public/properties`);
         const data = await response.json();
         if (data.success) {
           setProperties(data.data);

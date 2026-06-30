@@ -4,7 +4,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useEffect, useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 
-const SOCKET_URL = 'http://localhost:8081/ws';
+const SOCKET_URL = (import.meta.env.VITE_API_URL || 'http://185.2.102.63:8080/api/v1').replace('http', 'ws').replace('/api/v1', '/ws');
 
 export function useWebSocket() {
   const { token } = useAuth();
